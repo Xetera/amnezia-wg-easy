@@ -27,6 +27,10 @@ You have found the easiest way to install & manage WireGuard on any Linux host!
 
 * A host with Docker installed.
 
+## Notes
+
+This implementation of `amnezia-wg-easy` is based on w0rng's work, but with a key difference: it does not rely on the [amneziavpn/amnezia-wg](https://hub.docker.com/r/amneziavpn/amnezia-wg/) Docker image, which is limited to `linux/amd64` and thus not compatible with `arm64` and other architectures. Instead, this image provides `awg`, `awg-quick`, and `amneziawg-go` binaries built directly from the official sources. This allows the Docker image from this repository to be used across various architectures, such as `arm64`, and can be easily deployed on devices like the Raspberry Pi 5, for example, under Umbrel OS in Portainer CE. Therefore, the main advantage of this implementation over w0rng's is its cross-platform compatibility.
+
 ## Installation
 
 ### 1. Install Docker
@@ -135,6 +139,5 @@ And then run the `docker run -d \ ...` command above again.
 
 ## Thanks
 
-Based on [wg-easy](https://github.com/wg-easy/wg-easy) by Emile Nijssen.  
-And on [amnezia-wg-easy] (https://github.com/w0rng/amnezia-wg-easy) by w0rng.
+Based on [wg-easy](https://github.com/wg-easy/wg-easy) by Emile Nijssen and [amnezia-wg-easy](https://github.com/w0rng/amnezia-wg-easy) by w0rng.  
 Use integrations with AmneziaWg from [amnezia-wg-easy](https://github.com/spcfox/amnezia-wg-easy) by Viktor Yudov.
