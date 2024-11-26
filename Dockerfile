@@ -13,8 +13,23 @@ RUN npm ci --omit=dev &&\
 
 # Copy build result to a new image.
 # This saves a lot of disk space.
-FROM amneziavpn/amnezia-wg:latest
-HEALTHCHECK CMD /usr/bin/timeout 5s /bin/sh -c "/usr/bin/wg show | /bin/grep -q interface || exit 1" --interval=1m --timeout=5s --retries=3
+FROM golang:1.22-alpine3.19 AS builder
+RUN apk update && apk add --no-cache git make bash build-base linux-headers
+
+RUN git clone https://github.com/amnezia-vpn/amneziawg-tools.git && \
+    (cd amneziawg-tools && git checkout c0b400c6dfc046f5cae8f3051b14cb61686fcf55) && \
+    git clone https://github.com/amnezia-vpn/amneziawg-go.git && \
+    (cd amneziawg-go && git checkout 2e3f7d122ca8ef61e403fddc48a9db8fccd95dbf)
+
+RUN make -C amneziawg-tools/src WITH_WGQUICK=yes install && \
+    make -C amneziawg-go
+
+FROM alpine:latest
+COPY --from=builder /go/amneziawg-go/amneziawg-go /usr/bin/amneziawg-go
+COPY --from=builder /usr/bin/awg /usr/bin/awg
+COPY --from=builder /usr/bin/awg-quick /usr/bin/awg-quick
+
+HEALTHCHECK CMD /usr/bin/timeout 5s /bin/sh -c "/usr/bin/awg show | /bin/grep -q interface || exit 1" --interval=1m --timeout=5s --retries=3
 COPY --from=build_node_modules /app /app
 
 # Move node_modules one directory up, so during development
@@ -35,8 +50,10 @@ RUN apk add --no-cache \
     dpkg \
     dumb-init \
     iptables \
+    iptables-legacy \
     nodejs \
-    npm
+    npm \
+    bash
 
 # Use iptables-legacy
 RUN update-alternatives --install /sbin/iptables iptables /sbin/iptables-legacy 10 --slave /sbin/iptables-restore iptables-restore /sbin/iptables-legacy-restore --slave /sbin/iptables-save iptables-save /sbin/iptables-legacy-save
