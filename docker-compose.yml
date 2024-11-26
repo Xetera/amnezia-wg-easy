@@ -5,7 +5,7 @@ services:
   amnezia-wg-easy:
     env_file:
       - .env
-    image: ghcr.io/DeckerSU/amnezia-wg-easy
+    image: ghcr.io/deckersu/amnezia-wg-easy:latest
     container_name: amnezia-wg-easy
     volumes:
       - etc_amnezia_amneziawg:/etc/amnezia/amneziawg

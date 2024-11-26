@@ -66,7 +66,7 @@ To automatically install & run wg-easy, simply run:
   --sysctl="net.ipv4.ip_forward=1" \
   --device=/dev/net/tun:/dev/net/tun \
   --restart unless-stopped \
-  ghcr.io/DeckerSU/amnezia-wg-easy
+  ghcr.io/deckersu/amnezia-wg-easy:latest
 ```
 
 > 💡 Replace `YOUR_SERVER_IP` with your WAN IP, or a Dynamic DNS hostname.
@@ -132,7 +132,7 @@ To update to the latest version, simply run:
 ```bash
 docker stop amnezia-wg-easy
 docker rm amnezia-wg-easy
-docker pull ghcr.io/DeckerSU/amnezia-wg-easy
+docker pull ghcr.io/deckersu/amnezia-wg-easy:latest
 ```
 
 And then run the `docker run -d \ ...` command above again.
