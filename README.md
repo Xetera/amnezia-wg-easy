@@ -53,7 +53,7 @@ To automatically install & run wg-easy, simply run:
   -e PASSWORD_HASH=<🚨YOUR_ADMIN_PASSWORD_HASH> \
   -e PORT=51821 \
   -e WG_PORT=51820 \
-  -v ~/.amnezia-wg-easy:/etc/wireguard \
+  -v ~/.amnezia-wg-easy:/etc/amnezia/amneziawg \
   -p 51820:51820/udp \
   -p 51821:51821/tcp \
   --cap-add=NET_ADMIN \
