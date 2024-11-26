@@ -40,4 +40,4 @@ jobs:
       with:
         push: true
         platforms: linux/amd64,linux/arm64/v8
-        tags: ghcr.io/DeckerSU/amnezia-wg-easy:latest, ghcr.io/DeckerSU/amnezia-wg-easy:${{ env.RELEASE }}
+        tags: ghcr.io/deckersu/amnezia-wg-easy:latest, ghcr.io/deckersu/amnezia-wg-easy:${{ env.RELEASE }}
