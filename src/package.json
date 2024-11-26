@@ -4,7 +4,7 @@
   },
   "name": "amnezia-wg-easy",
   "version": "1.0.1",
-  "description": "Amnezia WireGuard VPN + Web-based Admin UI + awg_quick userspace implementation",
+  "description": "Amnezia WireGuard VPN + Web-based Admin UI (cross-platform)",
   "main": "server.js",
   "scripts": {
     "serve": "DEBUG=Server,WireGuard npx nodemon server.js",
