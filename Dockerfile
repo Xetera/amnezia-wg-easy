@@ -24,7 +24,7 @@ RUN git clone https://github.com/amnezia-vpn/amneziawg-tools.git && \
 RUN make -C amneziawg-tools/src WITH_WGQUICK=yes install && \
     make -C amneziawg-go
 
-FROM alpine:latest
+FROM alpine:3.20
 COPY --from=builder /go/amneziawg-go/amneziawg-go /usr/bin/amneziawg-go
 COPY --from=builder /usr/bin/awg /usr/bin/awg
 COPY --from=builder /usr/bin/awg-quick /usr/bin/awg-quick
