@@ -2,8 +2,8 @@
 # nodejs 20 hangs on build with armv6/armv7
 FROM docker.io/library/node:18-alpine AS build_node_modules
 
-# Update npm to latest
-RUN npm install -g npm@latest
+# Update npm to latest (actual npm@10.8.2)
+# RUN npm install -g npm@latest
 
 # Copy Web UI
 COPY src /app
